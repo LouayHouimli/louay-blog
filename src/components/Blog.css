@@ -1,0 +1,39 @@
+body {
+    margin: 0; /* Ensure body has no default margin */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-body {
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center items horizontally */
+    margin-top: 1%;
+}
+
+.blog-container {
+    border: 3px solid black;
+    padding: 10px;
+    width: 800px;
+    margin-bottom: 20px; /* Space between blog containers */
+}
+
+.author-details {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Space between image and name */
+    font-weight: bold;
+}
+
+.author-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.author-name {
+    font-size: 20px;
+}
