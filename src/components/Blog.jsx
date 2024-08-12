@@ -171,6 +171,7 @@ useEffect(() => {
 
   return (
     <>
+    <h1 className='louay-title' onDoubleClick={getBlogs}>Louay Blogger</h1>
     <form action="">
       <table>
     <div className='create-container'>

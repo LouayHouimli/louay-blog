@@ -5,9 +5,15 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    user-select: none;
+    cursor: pointer;
+    transition: color 0.1s ease-in;
     
     
     
+}
+.louay-title:hover{
+    color: hsla(0, 0%, 0%, 0.574);
 }
 .not-found-blogs{
     font-size: 3rem;
