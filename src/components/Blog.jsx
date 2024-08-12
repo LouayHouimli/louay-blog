@@ -1,4 +1,4 @@
-import { collection,  getDocs ,addDoc } from 'firebase/firestore';
+import { collection,  getDocs ,addDoc,doc,deleteDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState ,useEffect} from 'react';
 import { db } from '../firebase-config';
@@ -47,6 +47,7 @@ const Blog = () => {
   const [newImg , setNewImg] = useState("")
   const [isSubmited , setIsSubmited] = useState(false)
   const [noBlogs,setNoBlogs ] = useState(false)
+  const [isDeleted,setIsDeleted] = useState(false)
 
 
   
@@ -78,7 +79,6 @@ const Blog = () => {
        setNewAuthor("")
        setNewContent("")
        setNewTile("")
-
        setIsSubmited(true)
       }
       catch(error){
@@ -91,6 +91,12 @@ const Blog = () => {
       alert("t5ali fehom fer8in")
     }
    
+
+  }
+  const deleteBlog =  async(id) =>{
+    const BlogDoc = doc(db,"blogs",id)
+    await deleteDoc(BlogDoc)
+    setIsDeleted(true)
 
   }
 
@@ -125,6 +131,14 @@ const Blog = () => {
     }
     
 }, [isSubmited]);
+
+useEffect(() => {
+  if (isDeleted){
+    getBlogs();
+    setIsDeleted(false)
+  }
+  
+}, [isDeleted]);
 
 
 
@@ -194,7 +208,7 @@ const Blog = () => {
     <div className='mini-body'>
         {blogs.map((blog) => 
             <div key={blog.id} className='blog-container'> 
-            
+              <input type="button" value="Delete" onClickCapture={() =>deleteBlog(blog.id)} />
                 <h1>{blog.title}</h1>
                 <h2>{blog.content}</h2>
                 <div className='author-details'>
