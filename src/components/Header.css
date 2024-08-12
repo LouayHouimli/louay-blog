@@ -4,7 +4,15 @@
     padding: 1%;
     display: flex;
     justify-content: center;
+    width: 100%;
     
     
     
+}
+.not-found-blogs{
+    font-size: 3rem;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
