@@ -1,24 +1,24 @@
 body {
-    margin: 0; /* Ensure body has no default margin */
+    margin: 0; 
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items to the start of the cross-axis */
-    flex-direction: row; /* Arrange children in a row */
-    height: 100vh; /* Full viewport height */
-    padding: 20px; /* Add padding around the body */
+    align-items: flex-start; 
+    flex-direction: row; 
+    height: 100vh; 
+    padding: 20px; 
 }
 
 .form-container {
-    flex: 1; /* Allow the form container to grow and shrink */
-    max-width: 400px; /* Limit the width of the form */
-    margin-right: 20px; /* Space between form and blog list */
+    flex: 1; 
+    max-width: 400px; 
+    margin-right: 20px; 
 }
 
 .mini-body {
-    flex: 2; /* Allow the blog list container to take more space */
+    flex: 2; 
     display: flex;
-    flex-direction: column; /* Arrange children in a column */
-    align-items: center; /* Center items horizontally */
+    flex-direction: column; 
+    align-items: center; 
     width: 100%;
 }
 
@@ -26,14 +26,14 @@ body {
     border: 3px solid black;
     padding: 10px;
     width: 800px;
-    margin-bottom: 20px; /* Space between blog containers */
+    margin-bottom: 20px; 
 }
 
 .author-details {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center items horizontally */
-    gap: 10px; /* Space between image and name */
+    justify-content: center; 
+    gap: 10px; 
     font-weight: bold;
 }
 
@@ -47,7 +47,6 @@ body {
     font-size: 20px;
 }
 
-/* Blog.css */
 
 form {
     margin: 20px;
