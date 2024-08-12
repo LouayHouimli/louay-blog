@@ -1,4 +1,4 @@
-import { collection,  getDocs ,addDoc,doc,deleteDoc } from 'firebase/firestore';
+import { collection,  getDocs ,addDoc,doc,deleteDoc , updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState ,useEffect} from 'react';
 import { db } from '../firebase-config';
@@ -76,6 +76,7 @@ const Blog = () => {
   const [isSubmited , setIsSubmited] = useState(false)
   const [noBlogs,setNoBlogs ] = useState(false)
   const [isDeleted,setIsDeleted] = useState(false)
+  const [isUpdated,setIsUpdated] = useState(false)
 
 
   
@@ -160,6 +161,14 @@ const Blog = () => {
 }, [isSubmited]);
 
 useEffect(() => {
+  if (isUpdated){
+    getBlogs();
+    setIsUpdated(false)
+  }
+  
+}, [isUpdated]);
+
+useEffect(() => {
   if (isDeleted){
     getBlogs();
     setIsDeleted(false)
@@ -167,7 +176,18 @@ useEffect(() => {
   
 }, [isDeleted]);
 
+const updateBlog = async (id,title,content,author,img) =>{
+  const newTitle = prompt("New Title : ")
+  const newContent = prompt("New Content : ")
+  const newAuthor = prompt("New Author : ")
+  const newImg = prompt("New Img Url : ")
+  console.log(newTitle)
 
+  const newFields = {title : newTitle, content :newContent , author:newAuthor , img:newImg}
+  const blogDoc = doc(db,"blogs",id)
+  await updateDoc(blogDoc,newFields)
+  setIsUpdated(true)
+}
 
   return (
     <>
@@ -236,7 +256,12 @@ useEffect(() => {
     <div className='mini-body'>
         {blogs.map((blog) => 
             <div key={blog.id} className='blog-container'> 
-              <input type="button" value="Delete" onClickCapture={() =>deleteBlog(blog.id)} />
+            <div className='edit-delete'>
+            <input type="button" value="Edit " onClick={() => updateBlog(blog.id,blog.title,blog.content,blog.author,blog.img)} />
+            <input type="button" value="Delete" onClick={() =>deleteBlog(blog.id)} />
+            </div>
+            
+              
                 <h1>{blog.title}</h1>
                 <h2>{blog.content}</h2>
                 <div className='author-details'>
