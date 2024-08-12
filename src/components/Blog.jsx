@@ -8,7 +8,9 @@ import './Blog.css'
 const Blog = () => {
 
  const [blogs,setBlogs] = useState([]);
+ const [blogsFetched,setBlogsFetched] = useState(0)
  const usersCollectionRef = collection(db, "blogs");
+ 
 
  const getBlogs = async () =>{
   try{
@@ -17,12 +19,16 @@ const Blog = () => {
     setBlogs(blogsData);
     localStorage.setItem('blogs', JSON.stringify(blogsData));
     console.log("fetched and saved to localStorage");
+    
+    
+    
     if (blogsData.length === 0){
       setNoBlogs(true)
     }
     else{
       setNoBlogs(false)
     }
+    
     
     
     
@@ -36,11 +42,33 @@ const Blog = () => {
     
     
    
-    
-
 
 
  }
+
+ const getLoadedBlogs = async () =>{
+  try{
+     const data = await getDocs(usersCollectionRef);
+     const blogsData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+     localStorage.setItem('blogslength', JSON.stringify(blogsData.length));
+    
+    
+  }
+  catch(error){
+    console.error("error fetching from firebase")
+  }
+   
+    
+
+ }
+
+ 
+
+
+ 
+
+
+
  const [newTitle, setNewTile] = useState("Hello Im Louay Houimli 😁")
   const [newContent , setNewContent] = useState("Greetings! 🌟 I'm Louay, a spirited Junior Front End Developer originating from the enchanting realm of Tunisia 🇹🇳 . As a fresh face in the world of web development, I'm captivated by the art of crafting seamless user experiences through the power of code and creativity. My journey began with a zeal for all things web-related, and I've embarked on this path to refine my skills and master the craft of Front End Development. With an ever-growing toolkit of HTML, CSS, and JavaScript wizardry, I'm eager to collaborate on projects that fuse imagination with innovation.")
   const [newAuthor,setNewAuthor] = useState("Louay Houimli")
@@ -102,9 +130,11 @@ const Blog = () => {
 
 
   useEffect(() => {
+    getLoadedBlogs()
     const storedBlogs = JSON.parse(localStorage.getItem('blogs'));
-
-      if (storedBlogs) {
+    const blogsLength = JSON.parse(localStorage.getItem('blogslength'));
+    console.log(blogsLength,'/',storedBlogs.length)
+      if (storedBlogs.length == blogsLength) {
         setBlogs(storedBlogs);
         console.log("Loaded blogs from localStorage");
         if (storedBlogs.length === 0){
@@ -117,10 +147,7 @@ const Blog = () => {
         getBlogs();
       }
 
-      
-  
-    
-    
+
     
   }, []);
 
