@@ -177,10 +177,10 @@ useEffect(() => {
 }, [isDeleted]);
 
 const updateBlog = async (id,title,content,author,img) =>{
-  const newTitle = prompt("New Title : ")
-  const newContent = prompt("New Content : ")
-  const newAuthor = prompt("New Author : ")
-  const newImg = prompt("New Img Url : ")
+  const newTitle = prompt("New Title : ",title)
+  const newContent = prompt("New Content : ",content)
+  const newAuthor = prompt("New Author : ",author)
+  const newImg = prompt("New Img Url : ",img)
   console.log(newTitle)
 
   const newFields = {title : newTitle, content :newContent , author:newAuthor , img:newImg}
